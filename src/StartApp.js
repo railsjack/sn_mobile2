@@ -31,10 +31,10 @@ import React from "react";
 import { Root } from "native-base";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-import Loading from "./pages/sessions/Loading"
-import Main from "./pages/sessions/Main"
-import Login from "./pages/sessions/Login"
-import SignUp from "./pages/sessions/SignUp"
+import Loading from "./pages/Sessions/Loading"
+import Main from "./pages/Sessions/Main"
+import Login from "./pages/Sessions/Login"
+import SignUp from "./pages/Sessions/SignUp"
 
 const switchNavigator = createSwitchNavigator({
         Loading: {screen: Loading},

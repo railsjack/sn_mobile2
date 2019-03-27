@@ -16,7 +16,7 @@
  *
  * @Notice
  *  - We use "react-native" not "native-base"
- *  - styles needs to be declared and defiend out of Class
+ *  - styles needs to be declared and defined out of Class
  */
 
 import React from "react";
