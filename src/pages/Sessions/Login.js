@@ -23,17 +23,14 @@
 
 import React from "react";
 import {
-    ActivityIndicator, ImageBackground, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View
+    ActivityIndicator, ImageBackground, StatusBar, Text, TextInput, View
 } from "react-native";
-
 import {
-    Button, Container, Toast
+    Button, Container
 } from "native-base";
-
-/**
- *  We import styles from "Login.styles.js"
- */
 import styles from "./Login.style"
+
+
 
 /**
  *  - create & export a class named "Login" extends React.Component
