@@ -23,10 +23,12 @@
 
 import React from "react";
 import {
-    View, Text, StyleSheet
+    View, StyleSheet
 } from "react-native";
-
-
+import {isSignedIn} from "../../utils/Auth";
+import {
+    Text, Button
+} from "native-base";
 
 /**
  *  - create & export a class named "Loading" extends React.Component
@@ -39,8 +41,11 @@ export default class Loading extends React.Component {
      *    If authenticated, show Main or Login
      */
     componentDidMount(): void {
-        const userAuthenticated = true
-        this.props.navigation.navigate(userAuthenticated? 'Main' : 'Login')
+        isSignedIn()
+            .then( (signedIn) => {
+                this.props.navigation.navigate( (signedIn? 'Main' : 'Login') )
+            })
+            .catch( err => alert("An error occurred: #{error}") )
     }
 
     /**
@@ -53,6 +58,7 @@ export default class Loading extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>Loading...</Text>
+                <Button/>
             </View>
         )
     }

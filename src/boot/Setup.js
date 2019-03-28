@@ -29,13 +29,15 @@
 
 import React from "react";
 import { StyleProvider } from "native-base";
+import getTheme from "../theme/components";
+import variables from "../theme/variables/commonColor";
 
 import StartApp from "../StartApp";
 
 export default class Setup extends React.Component {
     render() {
         return (
-            <StyleProvider>
+            <StyleProvider style={getTheme(variables)}>
                 <StartApp/>
             </StyleProvider>
         )

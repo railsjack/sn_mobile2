@@ -11,6 +11,7 @@
  *  - import View, Text, StyleSheet from "react-native"
  *  - create & export a class named "AllLovedOnes" extends React.Component
  *  - implement render
+ *  - Load data from the Server
  *  - declare and define "styles" for views (container)
  *
  * @Notice

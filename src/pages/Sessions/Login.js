@@ -9,7 +9,9 @@
  *
  * @flow
  *  - import React from "react"
- *  - import View, Text, StyleSheet from "react-native"
+ *  - import View, Text, StyleSheet, ImageBackground, TextInput,
+ *      StatusBar, ActivityIndicator from "react-native"
+ *  - import Container, Button, H3, Toast
  *  - create & export a class named "Login" extends React.Component
  *  - implement render
  *  - declare and define "styles" for views (container)
@@ -21,42 +23,103 @@
 
 import React from "react";
 import {
-    View, Text, StyleSheet
+    ActivityIndicator, ImageBackground, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View
 } from "react-native";
+
+import {
+    Button, Container, Toast
+} from "native-base";
+
+/**
+ *  We import styles from "Login.styles.js"
+ */
+import styles from "./Login.style"
 
 /**
  *  - create & export a class named "Login" extends React.Component
  */
 export default class Login extends React.Component {
+    /**
+     *
+     *  - Handling Login
+     *    In this method, we handle logging in to our system.
+     *    * We need a variable named "state" in this class.
+     *      state = {username, password, loading}
+     *    * when a user enters username, it will be stored into this.state,username
+     *    * when a user enters password, it will be stored into this.state.password
+     *    * when a user clicks a button "Login", the loading will become "true"
+     *      And it sends the server the request with username and password.
+     *    * when a response arrives from the API server, the loading will become "false"
+     *      when a response is successful, we call onSignIn() in auth module.
+     *      when a response is failsure, we displays an error message using Toast
+     */
+
+    state = { username: "", password: "", loading: false };
+    handleLogin = () => {
+        this.setState( {loading: true} )
+    }
 
     /**
      *
      *  - implement render
      *    In this method, we show View and Text "Login" for now
-     *
+     *    @Structure
+     *     Container
+     *       StatusBar [barStyle="light-content"]
+     *       ImageBackground [source=launchScreenBg ]
+     *         View [style=styles.container]
+     *           ImageBackground [source=launchScreenLogo ]
+     *           TextInput > User name
+     *           TextInput > Password
+     *           Button > Login [onPress=*handleLogin]
+     *             ActivityIndicator [size="small"]
+     *             :
+     *             Text > Login
      */
     render()  {
+        const launchScreenBg = require("../../../assets/launchscreen-bg.png");
+        const launchScreenLogo = require("../../../assets/logo.png");
         return (
-            <View style={styles.container}>
-                <Text>Login</Text>
-            </View>
+            <Container>
+                <StatusBar barStyle="light-content" />
+                <ImageBackground source={launchScreenBg} style={styles.imageContainer}>
+                    <View style={styles.container}>
+
+                        <ImageBackground source={launchScreenLogo} style={styles.logo} />
+                        <TextInput
+                            editable={!this.state.loading}
+                            style={styles.textInput}
+                            placeholder="User name"
+                            placeholderTextColor="lightgray"
+                            autoCapitalize="none"
+                            onChangeText={username => this.setState({username: username}) }
+                        />
+                        <TextInput
+                            editable={!this.state.loading}
+                            style={styles.textInput}
+                            placeholder="Password"
+                            placeholderTextColor="lightgray"
+                            autoCapitalize="none"
+                            secureTextEntry
+                            onChangeText={password => this.setState({password: password})}
+                        />
+                        <Button success block
+                            disabled={this.state.loading}
+                            style={[styles.button_base, this.state.loading && styles.button_base_disabled]}
+                            onPress={this.handleLogin}>
+                            {
+                                this.state.loading ?
+                                    <ActivityIndicator size='small' />
+                                    :
+                                    <Text style={styles.button_text}>Login</Text>
+                            }
+                        </Button>
+                    </View>
+                </ImageBackground>
+            </Container>
+
+
         )
     }
 
 }
-
-
-/**
- *
- *  - declare and define "styles" for views (container)
- *    flex: 1, justfiyContent: 'center' (Vertically), alignItems: 'center' (Horizontally)
- *
- */
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
-
