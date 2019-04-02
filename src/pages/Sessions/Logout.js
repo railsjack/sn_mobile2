@@ -20,31 +20,33 @@
  */
 
 import React from "react";
-import {
-    View, Text, StyleSheet
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import Auth from "../../utils/Auth";
+import Loading from "./Loading";
 
 /**
  *  - create & export a class named "Logout" extends React.Component
  */
 export default class Logout extends React.Component {
+  componentDidMount(): void {
+    Auth.onSignOut();
+    this.props.navigation.navigate("Loading");
+  }
 
-    /**
-     *
-     *  - implement render
-     *    In this method, we show View and Text "Logout" for now
-     *
-     */
-    render()  {
-        return (
-            <View style={styles.container}>
-                <Text>Logout</Text>
-            </View>
-        )
-    }
-
+  /**
+   *
+   *  - implement render
+   *    In this method, we show View and Text "Logout" for now
+   *
+   */
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Logging out...</Text>
+      </View>
+    );
+  }
 }
-
 
 /**
  *
@@ -53,10 +55,9 @@ export default class Logout extends React.Component {
  *
  */
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
-
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  }
+});

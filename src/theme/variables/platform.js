@@ -147,7 +147,7 @@ export default {
   tabBarActiveTextColor: platform === "ios" ? "#007aff" : "#fff",
   tabActiveBgColor: platform === "ios" ? "#cde1f9" : "#3F51B5",
 
-  // Header
+  // LHeader
   toolbarBtnColor: platform === "ios" ? "#007aff" : "#fff",
   toolbarDefaultBg: platform === "ios" ? "#F8F8F8" : "#3F51B5",
   toolbarHeight: platform === "ios" ? 64 : 56,

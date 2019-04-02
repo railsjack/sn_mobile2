@@ -20,27 +20,42 @@
  */
 
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { FlatList, ImageBackground, View } from "react-native";
+
+import gstyles from "../components/global";
+import LovedOne from "../components/LovedOne";
+import LHeader from "../components/LHeader";
 
 export default class AllLovedOnes extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>
-                    All Loved Ones
-                </Text>
-            </View>
-        )
-    }
+  state = { data: [{ key: "a", name: "test1" }, { key: "b" }, { key: "c" }] };
+  /**
+   *  - implement render
+   *  @Structure
+   *  ImageBackground
+   *    LHeader (abbr. Lovedone Header)
+   *    View
+   *      FlatList [ data <= Dara Array, renderItem <= Item to Render ]
+   *          LovedOne
+   *          LovedOne
+   *          ...
+   *  @DataArray
+   *    ref: this.state.data
+   *    source: Server API
+   * */
+  render() {
+    const launchScreenBg = require("../../../assets/launchscreen-bg.png");
+    return (
+      <ImageBackground source={launchScreenBg} style={gstyles.imageContainer}>
+        <LHeader style={{ flex: 1 }} />
+        <View style={{ flex: 1 }}>
+          <FlatList
+            data={this.state.data}
+            renderItem={({ item }) => (
+              <LovedOne key={item.key} name={item.name} date={item.date} type="normal" />
+            )}
+          />
+        </View>
+      </ImageBackground>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
-
-
-

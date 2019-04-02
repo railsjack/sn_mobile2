@@ -19,27 +19,53 @@
  */
 
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { FlatList, ImageBackground, View } from "react-native";
+import styles from "../components/global";
+import LHeader from "../components/LHeader";
+import LovedOne from "../components/LovedOne";
 
 export default class ActiveLovedOnes extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>
-                    Active Loved Ones
-                </Text>
-            </View>
-        )
-    }
+  state = {
+      data: [
+          { key: "a", name: "test 2", date: "4/2/2019" },
+          { key: "a1", name: "test 21", date: "4/2/2019" },
+          { key: "a2", name: "test 22", date: "4/2/2019" },
+          { key: "a3", name: "test 23", date: "4/2/2019" },
+          { key: "a4", name: "test 24", date: "4/2/2019" },
+          { key: "a5", name: "test 25", date: "4/2/2019" },
+          { key: "a6", name: "test 26", date: "4/2/2019" },
+          { key: "a7", name: "test 27", date: "4/2/2019" },
+          { key: "a8", name: "test 28", date: "4/2/2019" }
+      ]
+  };
+  /**
+   *  - implement render
+   *  @Structure
+   *  ImageBackground
+   *    LHeader (abbr. Lovedone Header)
+   *    View
+   *      FlatList [ data <= Dara Array, renderItem <= Item to Render ]
+   *          LovedOne
+   *          LovedOne
+   *          ...
+   *  @DataArray
+   *    ref: this.state.data
+   *    source: Server API
+   * */
+  render() {
+    const launchScreenBg = require("../../../assets/launchscreen-bg.png");
+    return (
+      <ImageBackground source={launchScreenBg} style={styles.imageContainer}>
+        <LHeader style={{ flex: 1  }} />
+        <View style={{ flex: 1 }}>
+          <FlatList
+            data={this.state.data}
+            renderItem={({ item }) => (
+              <LovedOne key={item.key} name={item.name} date={item.date} type="active" />
+            )}
+          />
+        </View>
+      </ImageBackground>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
-
-
-

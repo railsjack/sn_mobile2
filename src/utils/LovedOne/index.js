@@ -11,16 +11,10 @@
  * */
 
 import {
-    signInWithUserNameAndPassword,
-    onSignIn,
-    onSignOut,
-    isSignedIn
-} from "./SignIn";
+    All
+} from "./LovedOneModel";
 
 export default {
-    signInWithUserNameAndPassword: signInWithUserNameAndPassword,
-    onSignIn: onSignIn,
-    onSignOut: onSignOut,
-    isSignedIn: isSignedIn
+    All: All
 }
 

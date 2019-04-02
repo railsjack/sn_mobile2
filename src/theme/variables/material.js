@@ -147,7 +147,7 @@ export default {
   tabBarActiveTextColor: "#fff",
   tabActiveBgColor: "#3F51B5",
 
-  // Header
+  // LHeader
   toolbarBtnColor: "#fff",
   toolbarDefaultBg: "#3F51B5",
   toolbarHeight: 56,

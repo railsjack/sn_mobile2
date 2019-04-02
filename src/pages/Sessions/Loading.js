@@ -22,13 +22,15 @@
  */
 
 import React from "react";
-import {
-    View, StyleSheet
-} from "react-native";
-import {isSignedIn} from "../../utils/Auth";
-import {
-    Text, Button
-} from "native-base";
+import { ActivityIndicator, ImageBackground, View } from "react-native";
+import { Container, Text } from "native-base";
+
+/**
+ * Auth is imported from util module
+ * styles is imported from customs/global
+ * */
+import Auth from "../../utils/Auth";
+import styles from "../components/global";
 
 /**
  *  - create & export a class named "Loading" extends React.Component
@@ -37,15 +39,18 @@ export default class Loading extends React.Component {
 
     /**
      *  - implement componentDidMount
-     *    In this method, we implements the feature to check if the user authenticated or not
+     *    In this method, we implement the feature to check if the user is authenticated or not
      *    If authenticated, show Main or Login
+     *    Auth.isSignedIn returns a promise if it is successful
+     *    In the promise, if signedIn is true, then it will show Main or Login page.
      */
     componentDidMount(): void {
-        isSignedIn()
+        Auth.isSignedIn()
             .then( (signedIn) => {
-                this.props.navigation.navigate( (signedIn? 'Main' : 'Login') )
-            })
-            .catch( err => alert("An error occurred: #{error}") )
+                setTimeout(()=>{
+                    this.props.navigation.navigate( (signedIn? 'Main' : 'Login') )
+                }, 1000);
+            });
     }
 
     /**
@@ -55,28 +60,21 @@ export default class Loading extends React.Component {
      *
      */
     render()  {
+        const launchScreenBg = require("../../../assets/launchscreen-bg.png");
         return (
-            <View style={styles.container}>
-                <Text>Loading...</Text>
-                <Button/>
-            </View>
+            <Container>
+                <ImageBackground source={launchScreenBg} style={styles.imageContainer}>
+                    <View style={styles.container}>
+                        <ActivityIndicator size="large" color="lightgray" />
+                        <Text style={styles.text}>
+                            {"\n"}
+                            Loading...
+                        </Text>
+                    </View>
+                </ImageBackground>
+            </Container>
         )
     }
 
 }
-
-
-/**
- *
- *  - declare and define "styles" for views (container)
- *    flex: 1, justfiyContent: 'center' (Vertically), alignItems: 'center' (Horizontally)
- *
- */
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
 
